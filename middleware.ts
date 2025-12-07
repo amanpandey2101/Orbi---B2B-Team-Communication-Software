@@ -1,21 +1,5 @@
-import { NextMiddleware, NextRequest, NextResponse } from "next/server";
-import arcjet, { createMiddleware, detectBot } from "@arcjet/next";
+import { NextRequest, NextResponse } from "next/server";
 import { getKindeServerSession, withAuth } from "@kinde-oss/kinde-auth-nextjs/server";
-
-const aj = arcjet({
-  key: process.env.ARCJET_KEY!,
-  rules: [
-    detectBot({
-      mode: "LIVE",
-      allow: [
-        "CATEGORY:SEARCH_ENGINE",
-        "CATEGORY:PREVIEW",
-        "CATEGORY:MONITOR",
-        "CATEGORY:WEBHOOK",
-      ],
-    }),
-  ],
-});
 
 async function existingMiddleware(req: NextRequest) {
   const { getClaim } = getKindeServerSession();
@@ -33,12 +17,9 @@ async function existingMiddleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-export default createMiddleware(
-  aj,
-  withAuth(existingMiddleware, {
-    publicPaths: ["/", "/api/uploadthing"],
-  }) as NextMiddleware
-);
+export default withAuth(existingMiddleware, {
+  publicPaths: ["/", "/api/uploadthing"],
+});
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|/rpc).*)"],
