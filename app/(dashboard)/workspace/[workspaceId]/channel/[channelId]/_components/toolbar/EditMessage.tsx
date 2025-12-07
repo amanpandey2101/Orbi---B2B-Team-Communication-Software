@@ -4,7 +4,7 @@ import { updateMessageSchema, UpdateMessageSchemaType } from "@/app/schemas/mess
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 import { RichTextEditor } from "@/components/rich-text-editor/Editor"
 import { Button } from "@/components/ui/button"
-import { Message } from "@prisma/client"
+import { Message } from "@/lib/generated/prisma/client"
 import { InfiniteData, useMutation, useQueryClient } from "@tanstack/react-query"
 import { orpc } from "@/lib/orpc"
 import { toast } from "sonner"
@@ -52,7 +52,7 @@ export function EditMessage({ message, onCancel, onSave }: Readonly<EditMessageP
                         }
                     }
                 )
-                toast.success("Cập nhật tin nhắn thành công!");
+                toast.success("Message updated successfully!");
                 onSave();
             },
             onError: (error) => {
@@ -85,14 +85,14 @@ export function EditMessage({ message, onCancel, onSave }: Readonly<EditMessageP
                                                 size="sm"
                                                 variant="outline"
                                             >
-                                                Hủy bỏ
+                                                Cancel
                                             </Button>
                                             <Button
                                                 disabled={updateMutation.isPending}
                                                 type="submit"
                                                 size="sm"
                                             >
-                                                {updateMutation.isPending ? "Đang lưu..." : "Lưu tin nhắn"}
+                                                {updateMutation.isPending ? "Saving..." : "Save message"}
                                             </Button>
                                         </div>
                                     }

@@ -7,7 +7,7 @@ import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query"
 import { orpc } from "@/lib/orpc"
 import { MessageItem } from "./message/MessageItem"
 import { Button } from "@/components/ui/button";
-import { EmptyState } from "@/components/general/EmtyState";
+import { EmptyState } from "@/components/general/EmptyState";
 
 export function MessageList() {
     const { channelId } = useParams<{ channelId: string }>();
@@ -193,9 +193,9 @@ export function MessageList() {
                 {isEmpty ? (
                     <div className="flex h-full p-4">
                         <EmptyState
-                            title="Không có tin nhắn nào"
-                            description="Bắt đầu cuộc trò chuyện bằng cách gửi tin nhắn đầu tiên."
-                            buttonText="Gửi tin nhắn"
+                            title="No messages yet"
+                            description="Start a conversation by sending the first message."
+                            buttonText="Send message"
                             href="#"
                         />
                     </div>
@@ -212,7 +212,7 @@ export function MessageList() {
                 <div className="pointer-events-none absolute top-0 left-0 right-0 z-20 flex items-center justify-center py-2">
                     <div className="flex items-center gap-2 rounded-md bg-linear-to-r from-white/80 to-transparent dark:from-neutral-900/80 backdrop-blur px-3 py-1">
                         <Loader2 className="size-4 animate-spin text-muted-foreground" />
-                        <span>Tải tin nhắn trước...</span>
+                        <span>Loading previous messages...</span>
                     </div>
                 </div>
             )}

@@ -186,7 +186,7 @@ export function ThreadSidebar({ user }: Readonly<ThreadSidebarProps>) {
                                             </span>
 
                                             <span className="text-xs text-muted-foreground">
-                                                {new Intl.DateTimeFormat('vi-VN', {
+                                                {new Intl.DateTimeFormat('en-US', {
                                                     hour: 'numeric',
                                                     minute: 'numeric',
                                                     hour12: true,
@@ -207,7 +207,7 @@ export function ThreadSidebar({ user }: Readonly<ThreadSidebarProps>) {
                             {/* thread replies */}
                             <div className="p-2">
                                 <p className="text-xs text-muted-foreground mb-3 px-2">
-                                    {data.messages.length} câu trả lời
+                                    {data.messages.length} {data.messages.length === 1 ? 'reply' : 'replies'}
                                 </p>
 
                                 <div className="space-y-1">

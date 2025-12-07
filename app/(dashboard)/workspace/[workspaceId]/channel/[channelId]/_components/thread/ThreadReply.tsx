@@ -27,7 +27,7 @@ export function ThreadReply({ message, selectedThreadId }: Readonly<ThreadReplyP
                     </span>
 
                     <span className="text-xs text-muted-foreground">
-                        {new Intl.DateTimeFormat('vi-VN', {
+                        {new Intl.DateTimeFormat('en-US', {
                             hour: 'numeric',
                             minute: 'numeric',
                             hour12: true,

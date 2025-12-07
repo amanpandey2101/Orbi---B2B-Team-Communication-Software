@@ -35,7 +35,7 @@ export function CreateNewChannel() {
     const createChannelMutation = useMutation(
         orpc.channel.create.mutationOptions({
             onSuccess: (newChannel) => {
-                toast.success(`Kênh "${newChannel.name}" đã được tạo thành công!`);
+                toast.success(`Channel "${newChannel.name}" created successfully!`);
                 queryClient.invalidateQueries({
                     queryKey: orpc.channel.list.queryKey(),
                 });
@@ -50,7 +50,7 @@ export function CreateNewChannel() {
                     toast.error(error.message);
                     return;
                 }
-                toast.error("Không tạo được kênh. Vui lòng thử lại!");
+                toast.error("Failed to create channel. Please try again!");
             }
         })
     )
@@ -71,14 +71,14 @@ export function CreateNewChannel() {
                     className="w-full dark:invert-20"
                 >
                     <Plus className="size-4" />
-                    Thêm kênh
+                    Add Channel
                 </Button>
             </DialogTrigger>
 
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Tạo kênh</DialogTitle>
-                    <DialogDescription>Tạo kênh mới để bắt đầu</DialogDescription>
+                    <DialogTitle>Create Channel</DialogTitle>
+                    <DialogDescription>Create a new channel to get started</DialogDescription>
                 </DialogHeader>
 
                 <Form {...form}>
@@ -88,14 +88,14 @@ export function CreateNewChannel() {
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Tên</FormLabel>
+                                    <FormLabel>Name</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="Kênh của bạn" {...field}
+                                            placeholder="Your channel" {...field}
                                         />
                                     </FormControl>
                                     {transformedName && transformedName !== watchedName && (
-                                        <p className="text-sm text-muted-foreground">Sẽ được tạo ra như: <code className="bg-muted px-1 py-0.5 rounded text-xs">{transformedName}</code></p>
+                                        <p className="text-sm text-muted-foreground">Will be created as: <code className="bg-muted px-1 py-0.5 rounded text-xs">{transformedName}</code></p>
                                     )}
                                     <FormMessage />
                                 </FormItem>
@@ -106,7 +106,7 @@ export function CreateNewChannel() {
                             disabled={createChannelMutation.isPending}
                             type="submit"
                         >
-                            {createChannelMutation.isPending ? "Đang tạo..." : "Tạo"}
+                            {createChannelMutation.isPending ? "Creating..." : "Create"}
                         </Button>
                     </form>
                 </Form>

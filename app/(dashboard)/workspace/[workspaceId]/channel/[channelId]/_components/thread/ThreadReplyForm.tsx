@@ -150,7 +150,7 @@ export function ThreadReplyForm({ threadId, user }: Readonly<ThreadReplyFormProp
 
                 setEditorKey((k) => k + 1);
 
-                return toast.success("Tin nhắn trả lời đã gửi");
+                return toast.success("Reply sent successfully");
             },
             onError: (_err, _vars, ctx) => {
                 if (!ctx) {
@@ -163,7 +163,7 @@ export function ThreadReplyForm({ threadId, user }: Readonly<ThreadReplyFormProp
                     queryClient.setQueryData(listOptions.queryKey, previous);
                 }
 
-                return toast.error("Đã có lỗi xảy ra.");
+                return toast.error("Something went wrong. Please try again.");
             },
         })
     )

@@ -25,7 +25,7 @@ export function MessageComposer({ value, onChange, onSubmit, isSubmitting, uploa
                 sendButton={
                     <Button disabled={isSubmitting} type="button" size="sm" onClick={onSubmit}>
                         <Send className="size-4 mr-1" />
-                        Gửi
+                        Send
                     </Button>}
 
                 footerLeft={
@@ -34,7 +34,7 @@ export function MessageComposer({ value, onChange, onSubmit, isSubmitting, uploa
                     ) : (
                         <Button className="dark:invert-20" onClick={() => upload.setIsOpen(true)} type="button" size="sm" variant="outline" >
                             <FileIcon className="size-4 mr-1" />
-                            Đính kèm File
+                            Attach File
                         </Button>
                     )
                 }

@@ -120,7 +120,7 @@ export function ReactionsBar({ messageId, reactions, context }: Readonly<Reactio
                 }
             },
             onSuccess: () => {
-                return toast.success("Đã thêm biểu tượng cảm xúc!");
+                return toast.success("Reaction added!");
             },
             onError: (_err, _vars, ctx) => {
                 if (ctx?.threadQueryKey && ctx.prevThread) {
@@ -131,7 +131,7 @@ export function ReactionsBar({ messageId, reactions, context }: Readonly<Reactio
                     queryClient.setQueryData(ctx.listKey, ctx.previous);
                 }
 
-                return toast.error("Biểu tượng cảm xúc chưa được thêm");
+                return toast.error("Failed to add reaction");
             },
         })
     )

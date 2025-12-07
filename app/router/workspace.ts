@@ -5,9 +5,16 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { requiredAuthMiddleware } from "../middlewares/auth";
 import { requiredWorkspaceMiddleware } from "../middlewares/workspace";
 import { workspaceSchema } from "../schemas/workspace";
-import { init, Organizations } from "@kinde/management-api-js"
+import { Organizations } from "@kinde/management-api-js";
 import { standardSecurityMiddleware } from "../middlewares/arcjet/standard";
 import { heavyWriteSecurityMiddleware } from "../middlewares/arcjet/heavy-write";
+import "@/lib/kinde-management.ts";
+import { writeSecurityMiddleware } from "../middlewares/arcjet/write";
+import { readSecurityMiddleware } from "../middlewares/arcjet/read";
+async function fetchAllOrganizations() {
+  const res = await Organizations.getOrganizations({ pageSize: 100 });
+  return res.organizations ?? [];
+}
 
 export const listWorkspaces = base
   .use(requiredAuthMiddleware)
@@ -33,31 +40,48 @@ export const listWorkspaces = base
     })
   )
   .handler(async ({ context, errors }) => {
+
     const { getUserOrganizations } = getKindeServerSession();
+    console.log("Getting organizations...");
 
     const organizations = await getUserOrganizations();
-
+    console.log("Organizations:", organizations);
     if (!organizations) {
       throw errors.FORBIDDEN();
     }
+    const orgCodes = organizations.orgCodes ?? [];
+
+    const allOrgs = await fetchAllOrganizations();
+    const orgByCode = new Map(allOrgs.map((o) => [o.code, o]));
+
+    const workspaces = orgCodes.map((code) => {
+      const org = orgByCode.get(code);
+      const name = org?.name ?? "My Workspace";
+
+      return {
+        id: code,
+        name,
+        avatar: name.charAt(0) ?? "M",
+      };
+    });
+
+    console.log("Workspaces:", workspaces);
 
     return {
-      workspaces: organizations?.orgs.map((org) => ({
-        id: org.code,
-        name: org.name ?? "My Workspace",
-        avatar: org.name?.charAt(0) ?? "M",
-      })),
+      workspaces,
       user: context.user,
-      currentWorkspace: context.workspace
-    }
+      currentWorkspace: context.workspace,
+    };
+
   });
 
-
-  export const createWorkspace = base
-  .use(requiredAuthMiddleware)
-  .use(requiredWorkspaceMiddleware)
-  .use(standardSecurityMiddleware)
-  .use(heavyWriteSecurityMiddleware)
+export const createWorkspace = base
+.use(requiredAuthMiddleware)
+.use(requiredWorkspaceMiddleware)
+.use(standardSecurityMiddleware)
+.use(heavyWriteSecurityMiddleware)
+.use(writeSecurityMiddleware)
+.use(readSecurityMiddleware)
   .route({
     method: "POST",
     path: "/workspace",
@@ -72,8 +96,7 @@ export const listWorkspaces = base
     })
   )
   .handler(async ({ context, errors, input }) => {
-    init();
-
+  
     let data;
 
     try {
@@ -81,8 +104,10 @@ export const listWorkspaces = base
         requestBody: {
           name: input.name,
         },
-      })
-    } catch {
+      });
+      console.log("CREATE ORG SUCCESS", data);
+    } catch (err) {
+      console.error("CREATE ORG ERROR", err);
       throw errors.FORBIDDEN();
     }
 
@@ -102,9 +127,11 @@ export const listWorkspaces = base
               roles: ["admin"],
             },
           ],
-        }
+        },
       });
-    } catch {
+      console.log("ADD USER SUCCESS");
+    } catch (err) {
+      console.error("ADD USER ERROR", err);
       throw errors.FORBIDDEN();
     }
 

@@ -23,18 +23,18 @@ export function MemberOverview() {
     const [search, setSearch] = useState("");
 
     const { data, isLoading, error } = useQuery(
-        orpc.workspace.member.list.queryOptions()
+        orpc.workspace?.member.list.queryOptions()
     )
 
     if (error) {
-        return <h1>Lỗi: {error.message}</h1>
+        return <h1>Error: {error.message}</h1>
     }
 
     const members = data ?? [];
 
     const query = search.trim().toLowerCase();
 
-    const filteredMembers = query ? members.filter((m) => {
+    const filteredMembers = query ? members?.filter((m) => {
         const name = m.full_name?.toLowerCase();
 
         const email = m.email?.toLowerCase();
@@ -58,7 +58,7 @@ export function MemberOverview() {
     } else if (filteredMembers.length === 0) {
         memberContent = (
             <p className="px-4 py-6 text-sm text-muted-foreground">
-                Không tìm thấy thành viên nào
+                No members found
             </p>
         );
     } else {
@@ -75,7 +75,7 @@ export function MemberOverview() {
                     className="dark:invert-20"
                 >
                     <Users />
-                    <span>Thành viên</span>
+                    <span>Members</span>
                 </Button>
             </PopoverTrigger>
 
@@ -83,8 +83,8 @@ export function MemberOverview() {
                 <div className="p-0">
                     {/* header */}
                     <div className="px-4 py-3 border-b">
-                        <h3 className="font-semibold text-sm">Thành viên trong kênh</h3>
-                        <p className="text-xs text-muted-foreground">Danh sách thành viên</p>
+                        <h3 className="font-semibold text-sm">Members in channel</h3>
+                        <p className="text-xs text-muted-foreground">Member list</p>
                     </div>
 
                     {/* search */}
@@ -96,7 +96,7 @@ export function MemberOverview() {
                             <Input
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                placeholder="Tìm kiếm thành viên..."
+                                placeholder="Search members..."
                                 className="pl-9 h-8"
                             />
                         </div>

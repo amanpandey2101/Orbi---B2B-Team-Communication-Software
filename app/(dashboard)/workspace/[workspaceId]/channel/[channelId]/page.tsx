@@ -26,7 +26,9 @@ const ChannelPageMain = () => {
 
     if (error) {
         return (
-            <p>lỗi</p>
+            <div className="flex items-center justify-center h-full">
+                <p className="text-destructive">Error loading channel. Please try again.</p>
+            </div>
         )
     }
 

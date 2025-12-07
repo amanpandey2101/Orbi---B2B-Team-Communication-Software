@@ -14,7 +14,7 @@ export function ImageUploadModal({ open, onOpenChange, onUploaded }: Readonly<Im
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Tải lên hình ảnh</DialogTitle>
+                    <DialogTitle>Upload Image</DialogTitle>
                 </DialogHeader>
 
                 <UploadDropzone
@@ -23,14 +23,23 @@ export function ImageUploadModal({ open, onOpenChange, onUploaded }: Readonly<Im
                         container: "bg-card",
                         label: "text-muted-foreground",
                         allowedContent: "text-xs text-muted-foreground",
-                        button: "bg-primary text-primary-foreground hover:bg-primary/50",
+                        button: "bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md cursor-pointer",
                         uploadIcon: "text-muted-foreground",
+                    }}
+                    content={{
+                        label: "Drag and drop your image here",
+                        allowedContent: "Images up to 4MB",
+                        button({ ready, isUploading }) {
+                            if (isUploading) return "Uploading...";
+                            if (ready) return "Choose File";
+                            return "Getting ready...";
+                        },
                     }}
                     endpoint={"imageUploader"}
                     onClientUploadComplete={(res) => {
                         const url = res[0].ufsUrl;
 
-                        toast.success("Hình ảnh tải lên thành công");
+                        toast.success("Image uploaded successfully");
 
                         onUploaded(url);
                     }}

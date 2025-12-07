@@ -10,7 +10,7 @@ import { MessageComposer } from "./MessageComposer";
 import { InfiniteData, useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { useAttachmentUpload } from "@/hooks/use-attachment-upload";
-import { Message } from "@prisma/client";
+import { Message } from "@/lib/generated/prisma/client";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { getAvatar } from "@/lib/get-avatar";
 
@@ -146,7 +146,7 @@ export function MessageInputForm({ channelId, user }: Readonly<MessageInputFormP
 
                 setEditorKey((k) => k + 1);
 
-                return toast.success("Tin nhắn được gửi");
+                return toast.success("Message sent successfully");
             },
             onError: (_err, _variables, context) => {
                 if (context?.previousData) {
@@ -156,7 +156,7 @@ export function MessageInputForm({ channelId, user }: Readonly<MessageInputFormP
                     );
                 }
 
-                return toast.error("Đã có lỗi xảy ra.");
+                return toast.error("Something went wrong. Please try again.");
             },
         })
     )

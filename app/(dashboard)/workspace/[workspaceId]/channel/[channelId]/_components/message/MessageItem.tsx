@@ -40,7 +40,7 @@ export function MessageItem({ message, currentUserId }: Readonly<MessageItemProp
         <div className="flex space-x-3 relative p-3 rounded-lg group hover:bg-muted/50">
             <Image
                 src={getAvatar(message.authorAvatar, message.authorEmail)}
-                alt="Hình đại diện của người dùng"
+                alt="User Avatar"
                 width={32}
                 height={32}
                 className="size-8 rounded-lg"
@@ -50,13 +50,13 @@ export function MessageItem({ message, currentUserId }: Readonly<MessageItemProp
                 <div className="flex items-center gap-x-2">
                     <p className="font-medium leading-none">{message.authorName}</p>
                     <p className="text-xs text-muted-foreground">
-                        {new Intl.DateTimeFormat('vi-VN', {
+                        {new Intl.DateTimeFormat('en-US', {
                             day: 'numeric',
                             month: 'short',
                             year: 'numeric',
                         }).format(message.createdAt)}
                         {' '}
-                        {new Intl.DateTimeFormat('vi-VN', {
+                        {new Intl.DateTimeFormat('en-US', {
                             hour12: false,
                             hour: '2-digit',
                             minute: '2-digit',
@@ -106,10 +106,10 @@ export function MessageItem({ message, currentUserId }: Readonly<MessageItemProp
                                 <MessageSquare className="size-3.5" />
                                 <span>
                                     {message.replyCount}{" "}
-                                    {message.replyCount === 1 ? 'hồi đáp' : 'câu trả lời'}
+                                    {message.replyCount === 1 ? 'reply' : 'replies'}
                                 </span>
                                 <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-                                    Xem Thread
+                                    View Thread
                                 </span>
                             </button>
                         )}

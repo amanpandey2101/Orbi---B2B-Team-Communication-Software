@@ -65,10 +65,10 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
             onClick={() => {
               clearError();
               setMessages([]);
-              sendMessage({ text: "Viết lại" });
+              sendMessage({ text: "Rewrite" });
             }}
           >
-            Thử lại
+            Try again
           </Button>
         </div>
       );
@@ -89,7 +89,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
     } else {
       popoverBodyContent = (
         <div className="text-sm text-muted-foreground">
-          Nhấp vào soạn thảo để tạo
+          Click to compose
         </div>
       );
     }
@@ -104,7 +104,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
                 return;
             }
 
-            sendMessage({ text: 'Viết lại' })
+            sendMessage({ text: 'Rewrite' })
         } else {
             stop();
 
@@ -124,7 +124,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
                 >
                     <span className="flex items-center gap-1.5">
                         <Sparkles className="size-3.5" />
-                        <span className="text-xs font-medium">Soạn</span>
+                        <span className="text-xs font-medium">Compose</span>
                     </span>
                 </Button>
             </PopoverTrigger>
@@ -136,7 +136,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
                     <div className="flex items-center gap-2">
                         <span className="relative inline-flex items-center justify-center rounded-full bg-linear-to-r from-violet-600 to-fuchsia-600 py-1.5 px-4 gap-1.5">
                             <Sparkles className="size-3.5 text-white" />
-                            <span className="text-sm font-medium text-white">Trợ lý soạn thảo (Xem trước)</span>
+                            <span className="text-sm font-medium text-white">Compose Assistant (Preview)</span>
                         </span>
                     </div>
 
@@ -147,7 +147,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
                             size="sm"
                             variant="outline"
                         >
-                            Dừng
+                            Stop
                         </Button>
                     )}
                 </div>
@@ -168,7 +168,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
                             setOpen(false)
                         }}
                     >
-                        Từ chối
+                        Reject
                     </Button>
 
                     <Button
@@ -184,7 +184,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
                         type="submit"
                         size="sm"
                     >
-                        Chấp nhận
+                        Accept
                     </Button>
                 </div>
             </PopoverContent>

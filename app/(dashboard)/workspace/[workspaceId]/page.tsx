@@ -32,9 +32,9 @@ const WorkspaceIdPage = async ({ params }: WorkspaceIdPageProps) => {
             <GrChannel />
           </EmptyMedia>
 
-          <EmptyTitle>Chưa có kênh nào!</EmptyTitle>
+          <EmptyTitle>There are no channels yet!</EmptyTitle>
           <EmptyDescription>
-            Tạo kênh đầu tiên của bạn để bắt đầu!
+            Create your first channel to get started!
           </EmptyDescription>
         </EmptyHeader>
         

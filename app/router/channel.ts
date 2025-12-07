@@ -6,7 +6,7 @@ import { requiredWorkspaceMiddleware } from "../middlewares/workspace";
 import { standardSecurityMiddleware } from "../middlewares/arcjet/standard";
 import { heavyWriteSecurityMiddleware } from "../middlewares/arcjet/heavy-write";
 import prisma from "@/lib/db";
-import { Channel } from "@prisma/client";
+import { Channel } from "@/lib/generated/prisma/client";
 import {
   init,
   organization_user,
@@ -23,7 +23,7 @@ export const createChannel = base
   .route({
     method: "POST",
     path: "/channels",
-    summary: "Tạo kênh mới trong không gian làm việc",
+    summary: "Create a new channel in a workspace",
     tags: ["channels"],
   })
   .input(ChannelNameSchema)
@@ -46,7 +46,7 @@ export const listChannels = base
   .route({
     method: "GET",
     path: "/channels",
-    summary: "Danh sách tất cả các kênh",
+    summary: "List all channels in a workspace",
     tags: ["channels"],
   })
   .input(z.void())
@@ -95,7 +95,7 @@ export const getChannel = base
   .route({
     method: "GET",
     path: "/channels/:channelId",
-    summary: "Nhận kênh theo ID",
+    summary: "Get channel by ID",
     tags: ["channels"],
   })
   .input(z.object({ channelId: z.string() }))

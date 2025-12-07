@@ -25,13 +25,14 @@ export default function InviteMember() {
     const inviteMutation = useMutation(
         orpc.workspace.member.invite.mutationOptions({
             onSuccess: () => {
-                toast.success("Lời mời đã được gửi thành công!");
+                toast.success("Invitation sent successfully!");
 
                 form.reset();
 
                 setOpen(false);
             },
             onError: (error) => {
+                console.log(error);
                 toast.error(error.message)
             }
         })
@@ -49,14 +50,14 @@ export default function InviteMember() {
                     className="dark:invert-20"
                 >
                     <UserPlus />
-                    Mời thành viên
+                    Invite Member
                 </Button>
             </DialogTrigger>
 
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Thành viên được mời</DialogTitle>
-                    <DialogDescription>Kết nối thành viên của bạn qua thư điện tử</DialogDescription>
+                    <DialogTitle>Invite Member</DialogTitle>
+                    <DialogDescription>Connect your team members via email</DialogDescription>
                 </DialogHeader>
 
                 <Form {...form}>
@@ -66,10 +67,10 @@ export default function InviteMember() {
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Tên thành viên</FormLabel>
+                                    <FormLabel>Member Name</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="Nhập tên thành viên..."
+                                            placeholder="Enter member name..."
                                             {...field}
                                         />
                                     </FormControl>
@@ -83,10 +84,10 @@ export default function InviteMember() {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Địa chỉ hòm thư</FormLabel>
+                                    <FormLabel>Email Address</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="Nhập địa chỉ E-mail..."
+                                            placeholder="Enter email address..."
                                             {...field}
                                         />
                                     </FormControl>
@@ -96,7 +97,7 @@ export default function InviteMember() {
                         />
 
                         <Button type="submit">
-                            Gửi lời mời
+                            Send Invitation
                         </Button>
                     </form>
                 </Form>

@@ -4,6 +4,7 @@ import { CreateWorkspace } from "./_components/CreateWorkspace";
 import { UserNav } from "./_components/UserNav";
 import { orpc } from "@/lib/orpc";
 import { getQueryClient, HydrateClient } from "@/lib/query/hydration";
+import { Providers } from "@/lib/providers";
 
 const  WorkspaceLayout = async ({ children }: { children: React.ReactNode }) => {
   const queryClient = getQueryClient();
@@ -11,6 +12,8 @@ const  WorkspaceLayout = async ({ children }: { children: React.ReactNode }) => 
   await queryClient.prefetchQuery(orpc.workspace.list.queryOptions())
 
   return (
+    <Providers>
+
     <div className="flex w-full h-screen">
       <div className="flex h-full w-16 flex-col items-center bg-secondary py-3 px-2 border-r border-border">
         <HydrateClient client={queryClient}>
@@ -27,8 +30,11 @@ const  WorkspaceLayout = async ({ children }: { children: React.ReactNode }) => 
           </HydrateClient>
         </div>
       </div>
+
       {children}
+
     </div>
+    </Providers>
   );
 }
 

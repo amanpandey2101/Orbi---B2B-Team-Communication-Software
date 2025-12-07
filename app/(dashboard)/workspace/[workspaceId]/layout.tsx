@@ -32,7 +32,7 @@ const ChannelListLayout = async ({ children, className }: { children: React.Reac
         <div className="flex-1 overflow-y-auto px-4">
           <Collapsible defaultOpen>
             <CollapsibleTrigger className="flex w-full items-center justify-between px-2 p-1 text-sm font-medium text-muted-foreground hover:text-accent-foreground">
-              Kênh chính
+              Main Channel
               <ChevronDown className="size-4 transition-transform duration-200" />
             </CollapsibleTrigger>
             <CollapsibleContent>
@@ -47,7 +47,7 @@ const ChannelListLayout = async ({ children, className }: { children: React.Reac
         <div className="px-4 py-2 border-t border-border">
           <Collapsible defaultOpen>
             <CollapsibleTrigger className="flex w-full items-center justify-between px-2 p-1 text-sm font-medium text-muted-foreground hover:text-accent-foreground [&[data-state=open]>svg]:rotate-180">
-              Thành viên
+              Members
               <ChevronUp className="size-4 transition-transform duration-200" />
             </CollapsibleTrigger>
             <CollapsibleContent>

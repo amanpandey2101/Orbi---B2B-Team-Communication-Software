@@ -54,7 +54,7 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
                 return;
             }
 
-            sendMessage({ text: 'Tóm tắt Thread' })
+            sendMessage({ text: 'Summarize Thread' })
         } else {
             stop();
 
@@ -79,10 +79,10 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
                     onClick={() => {
                         clearError()
                         setMessages([])
-                        sendMessage({ text: 'Tóm tắt Thread' })
+                        sendMessage({ text: 'Summarize Thread' })
                     }}
                 >
-                    Thử lại
+                    Retry
                 </Button>
             </div>
         )
@@ -105,7 +105,7 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
     } else {
         summaryContent = (
             <div className="text-sm text-muted-foreground">
-                Bấm vào tóm tắt để tạo
+                Click to generate a summary
             </div>
         )
     }
@@ -120,7 +120,7 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
                 >
                     <span className="flex items-center gap-1.5">
                         <Sparkles className="size-3.5" />
-                        <span className="text-xs font-medium">Tóm tắt</span>
+                        <span className="text-xs font-medium">Summarize</span>
                     </span>
                 </Button>
             </PopoverTrigger>
@@ -133,7 +133,7 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
                     <div className="flex items-center gap-2">
                         <span className="relative inline-flex items-center justify-center rounded-full bg-linear-to-r from-violet-600 to-fuchsia-600 py-1.5 px-4 gap-1.5">
                             <Sparkles className="size-3.5 text-white" />
-                            <span className="text-sm font-medium text-white">AI Tóm tắt(Xem trước)</span>
+                            <span className="text-sm font-medium text-white">AI Summary (Preview)</span>
                         </span>
                     </div>
 
@@ -144,7 +144,7 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
                             size="sm"
                             variant="outline"
                         >
-                            Dừng
+                            Stop
                         </Button>
                     )}
                 </div>

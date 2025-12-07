@@ -17,7 +17,7 @@ export function WorkspaceMemberList() {
                         <Avatar className="size-8 relative">
                             <Image
                                 src={getAvatar(member.picture ?? null, member.email!)}
-                                alt="Hình ảnh người dùng"
+                                alt="User Image"
                                 className="object-cover"
                                 fill
                             />

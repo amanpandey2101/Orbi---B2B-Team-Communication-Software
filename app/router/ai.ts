@@ -13,7 +13,7 @@ const openrouter = createOpenRouter({
   apiKey: process.env.LLM_KEY,
 });
 
-const MODEL_ID = "z-ai/glm-4.5-air:free";
+const MODEL_ID = "openrouter/auto";
 
 const model = openrouter.chat(MODEL_ID);
 
@@ -24,7 +24,7 @@ export const generateThreadSummary = base
   .route({
     method: "GET",
     path: "/ai/thread/summary",
-    summary: "Tạo summary cho thread",
+    summary: "Generate a summary for a thread",
     tags: ["Ai"],
   })
   .input(
