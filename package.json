@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
     "start": "next start",
     "lint": "eslint"
   },
@@ -15,6 +16,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@kinde-oss/kinde-auth-nextjs": "^2.10.0",
     "@kinde/management-api-js": "^0.14.0",
+    "@lexical/markdown": "^0.38.2",
     "@lexical/react": "^0.38.2",
     "@lexical/rich-text": "^0.38.2",
     "@openrouter/ai-sdk-provider": "^1.2.5",
@@ -80,6 +82,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@tanstack/eslint-plugin-query": "^5.91.2",
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^20",
     "@types/pg": "^8.15.6",
     "@types/react": "^19",

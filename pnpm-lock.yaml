@@ -26,6 +26,9 @@ importers:
       '@kinde/management-api-js':
         specifier: ^0.14.0
         version: 0.14.0
+      '@lexical/markdown':
+        specifier: ^0.38.2
+        version: 0.38.2
       '@lexical/react':
         specifier: ^0.38.2
         version: 0.38.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(yjs@13.6.27)
@@ -216,6 +219,9 @@ importers:
       '@tanstack/eslint-plugin-query':
         specifier: ^5.91.2
         version: 5.91.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
+      '@types/markdown-it':
+        specifier: ^14.1.2
+        version: 14.1.2
       '@types/node':
         specifier: ^20
         version: 20.19.24
