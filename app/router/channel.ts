@@ -14,6 +14,7 @@ import {
 } from "@kinde/management-api-js";
 import { KindeOrganization, KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { readSecurityMiddleware } from "../middlewares/arcjet/read";
+import "@/lib/kinde-management";
 
 export const createChannel = base
   .use(requiredAuthMiddleware)
@@ -69,8 +70,6 @@ export const listChannels = base
       }),
 
       (async () => {
-        init();
-
         const usersInOrg = await Organizations.getOrganizationUsers({
           orgCode: context.workspace.orgCode,
           sort: "name_desc",
